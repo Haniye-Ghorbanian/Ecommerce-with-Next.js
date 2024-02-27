@@ -6,16 +6,16 @@ import Products from "./components/products";
 import FooterMenu from "./components/footerMenu";
 
 
-
 export default function Home() {
-    return (
-        <div>
-            <Header />
-            <WelcomeBanner />
-            <Search />
-            <Filters />
-            <Products />
-            <FooterMenu />
-        </div>
-    );
+  return (
+    <div className="relative">
+      
+      <Header />
+      <WelcomeBanner />
+      <Search />
+      <Filters />
+      <Products />
+      <FooterMenu />
+    </div>
+  );
 }
