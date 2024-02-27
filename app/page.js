@@ -2296,7 +2296,7 @@ export default function StartPage() {
 
       <div className="flex justify-center pb-10">
         <button className="bg-white hover:bg-gray-100 transition-colors py-3 px-24 rounded-lg shadow-lg focus:outline-none focus:shadow-outline">
-          <Link href="/home">Get Started</Link> 
+          <Link href="/Home">Get Started</Link> 
         </button>
       </div>
     </main>
