@@ -35,7 +35,7 @@ export default function Products() {
         filteredProducts.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))
-      ) : products.length > 0 ? ( 
+      ) : products.length > 0 && filteredProducts.length === 0 ? ( 
         products.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))

@@ -15,10 +15,15 @@ const appSlice = createSlice({
       const filtered = state.products.filter((product) => {
         return product.category === action.payload;
       });
-      state.filteredProducts.push(filtered);
+      state.filteredProducts.push(...filtered);
     },
 
-    removeFilter(state, action) {},
+    removeFilter(state, action) {
+      const filtered = state.products.filter((product) => {
+        return product.category !== action.payload;
+      });
+      state.filteredProducts.push(...filtered);
+    },
   },
 });
 
