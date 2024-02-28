@@ -10,7 +10,7 @@ const appSlice = createSlice({
       state.products = action.payload;
     },
 
-    filter(state, action) {
+    applyFilter(state, action) {
       //   console.log("Products before filtering:", state.products);
       const filtered = state.products.filter((product) => {
         return product.category === action.payload;
@@ -19,10 +19,13 @@ const appSlice = createSlice({
     },
 
     removeFilter(state, action) {
-      const filtered = state.products.filter((product) => {
+      
+        const revised = state.filteredProducts.filter((product) => {
         return product.category !== action.payload;
       });
-      state.filteredProducts.push(...filtered);
+
+      state.filteredProducts = [];
+      state.filteredProducts.push(...revised)
     },
   },
 });

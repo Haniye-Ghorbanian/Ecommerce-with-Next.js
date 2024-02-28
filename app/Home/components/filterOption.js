@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { appActions } from "@/app/store";
 import { useDispatch } from "react-redux";
 
@@ -5,13 +6,15 @@ export default function FilterOption(props) {
   const dispatch = useDispatch();
 
   const handleFilter = (e) => {
-    console.log("Filtered category:", e.target.id, e.target.checked);
-    switch (e.target.checked) {
-      case true:
-        dispatch(appActions.filter(e.target.id));
+    // debugger;
 
-      case false:
-        dispatch(appActions.removeFilter(e.target.id));
+    console.log("Filtered category:", e.target.id, e.target.checked);
+
+    if (e.target.checked) {
+      dispatch(appActions.applyFilter(e.target.id));
+    } else {
+    //   debugger;
+      dispatch(appActions.removeFilter(e.target.id));
     }
   };
 

@@ -23,8 +23,8 @@ export default function Products() {
     };
 
     fetchProducts();
-    console.log("Products after fetching:", products);
-    console.log("Filtered products:", filteredProducts);
+    // console.log("Products after fetching:", products);
+    // console.log("Filtered products:", filteredProducts);
   }, []);
 
   return (
