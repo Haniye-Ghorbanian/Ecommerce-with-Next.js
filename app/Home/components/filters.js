@@ -12,7 +12,7 @@ export default function Filters() {
         "https://fakestoreapi.com/products/categories"
       );
       const categoriesData = await response.json();
-      console.log(categoriesData);
+      // console.log(categoriesData);
       setCategories(categoriesData);
     };
 
@@ -22,7 +22,7 @@ export default function Filters() {
   return (
     <div className="mb-4 w-full flex justify-between items-center h-16 px-6 overflow-x-scroll">
       {categories.map((category) => (
-        <FilterOption category={category} />
+        <FilterOption key={category} category={category} />
       ))}
     </div>
   );

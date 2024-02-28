@@ -14,9 +14,9 @@ export default function Search() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="white"
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <circle cx="10" cy="10" r="7" />
             <line x1="21" y1="21" x2="15" y2="15" />

@@ -1,5 +1,5 @@
 export default function ProductItem(props) {
-  console.log(props)
+  // console.log(props)
 const {title, image, category, price } = props.product;
   return (
     <div className="w-full flex items-center justify-start border border-solid border-gray-200 h-40 rounded-md p-2">
