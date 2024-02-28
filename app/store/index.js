@@ -1,6 +1,11 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { products: [], filteredProducts: [] };
+const initialState = {
+  products: [],
+  filteredProducts: [],
+  searchedProducts: [],
+  searchWarning: false 
+};
 
 const appSlice = createSlice({
   name: "app",
@@ -11,7 +16,6 @@ const appSlice = createSlice({
     },
 
     applyFilter(state, action) {
-      //   console.log("Products before filtering:", state.products);
       const filtered = state.products.filter((product) => {
         return product.category === action.payload;
       });
@@ -19,14 +23,21 @@ const appSlice = createSlice({
     },
 
     removeFilter(state, action) {
-      
-        const revised = state.filteredProducts.filter((product) => {
+      const revised = state.filteredProducts.filter((product) => {
         return product.category !== action.payload;
       });
 
       state.filteredProducts = [];
-      state.filteredProducts.push(...revised)
+      state.filteredProducts.push(...revised);
     },
+
+    search(state, action) {
+        const searchResults = state.products.filter(product => product.title.toLowerCase().includes(action.payload.toLowerCase()))
+        state.searchedProducts= [];
+        state.searchedProducts.push(...searchResults)
+        state.searchWarning = searchResults.length === 0;
+        action.payload === "" ? state.searchWarning = true : "";
+    }
   },
 });
 
@@ -38,4 +49,4 @@ export const appActions = appSlice.actions;
 
 export default store;
 
-console.log(initialState.products);
+

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Products() {
   const products = useSelector((state) => state.products);
   const filteredProducts = useSelector((state) => state.filteredProducts);
+  const searchedProducts = useSelector((state) => state.searchedProducts);
+  const searchedWarning = useSelector((state) => state.searchWarning);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,25 +25,31 @@ export default function Products() {
     };
 
     fetchProducts();
-    // console.log("Products after fetching:", products);
-    // console.log("Filtered products:", filteredProducts);
   }, []);
 
+  console.log(searchedProducts);
+  console.log(searchedWarning);
   return (
     <div className="w-full h-96 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-scroll px-6 pb-4 fixed top-96">
-      {isLoading ? ( 
-        <p>Loading products...</p>
-      ) : filteredProducts.length > 0 ? (
+      {isLoading && <p>Loading products...</p>}
+      {!isLoading &&
+        filteredProducts.length > 0 &&
         filteredProducts.map((product) => (
           <ProductItem key={product.id} product={product} />
-        ))
-      ) : products.length > 0 && filteredProducts.length === 0 ? ( 
+        ))}
+      {!isLoading &&
+        searchedProducts.length > 0 &&
+        searchedProducts.map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      {!isLoading && searchedWarning && <p>No products found!</p>}
+      {!isLoading &&
+        searchedProducts.length === 0 &&
+        filteredProducts.length === 0 &&
+        !searchedWarning &&
         products.map((product) => (
           <ProductItem key={product.id} product={product} />
-        ))
-      ) : (
-        <p>No products found.</p>
-      )}
+        ))}
     </div>
   );
 }
