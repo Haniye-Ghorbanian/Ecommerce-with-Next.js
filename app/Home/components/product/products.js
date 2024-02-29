@@ -5,16 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductsSkeleton from "../skeleton/productsSkeleton";
 
 
-function useId(prefix = 'id') {
-  const [id, setId] = useState('');
+// didn't work (?)
+// function useId(prefix = 'id') {
+//   const [id, setId] = useState('');
 
-  useEffect(() => {
-    const uniqueId = `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
-    setId(uniqueId);
-  }, [prefix]);
+//   useEffect(() => {
+//     const uniqueId = `${prefix}-${Math.random()*1000}`;
+//     setId(uniqueId);
+//   }, [prefix]);
 
-  return id;
-}
+//   return id;
+// }
 
 export default function Products() {
   const products = useSelector((state) => state.products);
@@ -22,8 +23,8 @@ export default function Products() {
   const searchedProducts = useSelector((state) => state.searchedProducts);
   const searchedWarning = useSelector((state) => state.searchWarning);
   const [isLoading, setIsLoading] = useState(true);
-  const uniqueId = useId('products');
   const dispatch = useDispatch();
+  // const uniqueId = useId('id');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,16 +36,16 @@ export default function Products() {
       } catch (error) {
         console.error("Error fetching products:", error);
         setIsLoading(true);
-      } 
+      }
     };
 
     fetchProducts();
-  }, []);
+  }, [dispatch]);
 
- 
   return (
-    <div className="w-full h-96 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-scroll px-6 pb-4 fixed top-96" key={uniqueId}>
-      {isLoading &&  [...Array(8)].map(item => (<ProductsSkeleton />))}
+    <div className="w-full h-96 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-scroll px-6 pb-4 fixed top-96">
+      {isLoading &&
+        [...Array(8)].map((item, index) => <ProductsSkeleton key={index} />)}
       {!isLoading &&
         filteredProducts.length > 0 &&
         filteredProducts.map((product) => (
@@ -53,9 +54,13 @@ export default function Products() {
       {!isLoading &&
         searchedProducts.length > 0 &&
         searchedProducts.map((product) => (
-          <ProductItem key={product.id} product={product} />
+          <ProductItem key={`p${product.id}`} product={product} />
         ))}
-      {!isLoading && searchedWarning && <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-main"><p>No products found!</p></div>}
+      {!isLoading && searchedWarning && (
+        <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-main">
+          <p>No products found!</p>
+        </div>
+      )}
       {!isLoading &&
         searchedProducts.length === 0 &&
         filteredProducts.length === 0 &&

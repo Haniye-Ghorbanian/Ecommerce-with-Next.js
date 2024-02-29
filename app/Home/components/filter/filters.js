@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import FilterOption from "./filterOption";
 import FiltersSkeleton from "../skeleton/filterSkeleton";
 
+
 export default function Filters() {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +28,7 @@ export default function Filters() {
 
   return (
     <div className="mb-4 w-full flex justify-between items-center pb-4 h-16 px-6 overflow-x-scroll">
-      {isLoading && [...Array(4)].map((item) => <FiltersSkeleton />)}
+      {isLoading && [...Array(4)].map((item, index) => <FiltersSkeleton key={index}/>)}
 
       {!isLoading &&
         categories.map((category) => (
