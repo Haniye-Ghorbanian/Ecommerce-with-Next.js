@@ -2,6 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Visit the website on: 
+(https://ecommerce-with-next-js-bay.vercel.app/)
+
 First, run the development server:
 
 ```bash
