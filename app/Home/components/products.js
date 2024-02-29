@@ -4,12 +4,25 @@ import { appActions } from "@/app/store";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSkeleton from "./productsSkeleton";
 
+
+function useId(prefix = 'id') {
+  const [id, setId] = useState('');
+
+  useEffect(() => {
+    const uniqueId = `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+    setId(uniqueId);
+  }, [prefix]);
+
+  return id;
+}
+
 export default function Products() {
   const products = useSelector((state) => state.products);
   const filteredProducts = useSelector((state) => state.filteredProducts);
   const searchedProducts = useSelector((state) => state.searchedProducts);
   const searchedWarning = useSelector((state) => state.searchWarning);
   const [isLoading, setIsLoading] = useState(true);
+  const uniqueId = useId('products');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +41,9 @@ export default function Products() {
     fetchProducts();
   }, []);
 
-  console.log(searchedProducts);
-  console.log(searchedWarning);
+ 
   return (
-    <div className="w-full h-96 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-scroll px-6 pb-4 fixed top-96">
+    <div className="w-full h-96 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-scroll px-6 pb-4 fixed top-96" key={uniqueId}>
       {isLoading &&  [...Array(8)].map(item => (<ProductsSkeleton />))}
       {!isLoading &&
         filteredProducts.length > 0 &&
@@ -43,7 +55,7 @@ export default function Products() {
         searchedProducts.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))}
-      {!isLoading && searchedWarning && <p>No products found!</p>}
+      {!isLoading && searchedWarning && <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-main"><p>No products found!</p></div>}
       {!isLoading &&
         searchedProducts.length === 0 &&
         filteredProducts.length === 0 &&
