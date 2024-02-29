@@ -1,15 +1,13 @@
 import { appActions } from "@/app/store";
-import { useState } from "react";
+
 import { useDispatch } from "react-redux";
 
 export default function Search() {
-  const [input, setInput] = useState("")
   const dispatch = useDispatch();
   const searchHandler = (e) => {
-    // debugger
     const enteredInput = e.target.value;
     setInput(enteredInput);
-    console.log(e.target.value);
+
     dispatch(appActions.search(e.target.value));
   };
 
@@ -17,7 +15,6 @@ export default function Search() {
     <div className="mb-4 px-6 flex justify-between items-center">
       <input
         type="text"
-        value={input}
         onChange={searchHandler}
         placeholder="Search Products"
         className="w-full h-12 rounded-md border border-gray-300 px-4 py-2 mr-2 focus:outline-none"
