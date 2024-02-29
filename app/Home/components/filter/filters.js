@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import FilterOption from "./filterOption";
-import FiltersSkeleton from "./filterSkeleton";
+import FiltersSkeleton from "../skeleton/filterSkeleton";
 
 export default function Filters() {
   const [categories, setCategories] = useState([]);

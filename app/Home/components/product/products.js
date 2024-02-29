@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProductItem from "./productItem";
 import { appActions } from "@/app/store";
 import { useDispatch, useSelector } from "react-redux";
-import ProductsSkeleton from "./productsSkeleton";
+import ProductsSkeleton from "../skeleton/productsSkeleton";
 
 
 function useId(prefix = 'id') {

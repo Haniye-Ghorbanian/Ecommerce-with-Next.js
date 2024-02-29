@@ -1,4 +1,4 @@
-import Filters from "./filters";
+import Filters from "../filter/filters";
 import WelcomeBanner from "./welcomeBanner";
 import Search from "./search";
 import Profile from "./profile";
