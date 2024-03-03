@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProductItem from "./productItem";
+import ProductItem from "../product/productItem";
 import { appActions } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSkeleton from "../skeleton/productsSkeleton";
@@ -41,9 +41,7 @@ export default function Products() {
       {!isLoading &&
         searchedProducts.length > 0 &&
         searchedProducts.map((product) => (
-          <Link href={`./Home/${products.id}`}>
-            <ProductItem key={`p${product.id}`} product={product} />
-          </Link>
+          <ProductItem key={`p${product.id}`} product={product} />
         ))}
       {!isLoading && searchedWarning && (
         <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-main">
