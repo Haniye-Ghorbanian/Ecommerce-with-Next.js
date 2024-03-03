@@ -1,10 +1,10 @@
 "use client";
 
-import Header from "./components/header/header";
-import Products from "./components/product/products";
-import FooterMenu from "./components/footer/footerMenu";
+import Header from "../../components/header/header";
+import Products from "../../components/product/products";
+import FooterMenu from "../../components/footer/footerMenu";
 import { Provider } from "react-redux";
-import store from "../store";
+import store from "../../store";
 
 export default function Home() {
   return (

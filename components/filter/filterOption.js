@@ -1,4 +1,4 @@
-import { appActions } from "@/app/store";
+import { appActions } from "../../store";
 import { useDispatch } from "react-redux";
 
 export default function FilterOption(props) {

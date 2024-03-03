@@ -1,21 +1,9 @@
 import { useEffect, useState } from "react";
 import ProductItem from "./productItem";
-import { appActions } from "@/app/store";
+import { appActions } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSkeleton from "../skeleton/productsSkeleton";
-
-
-// didn't work (?)
-// function useId(prefix = 'id') {
-//   const [id, setId] = useState('');
-
-//   useEffect(() => {
-//     const uniqueId = `${prefix}-${Math.random()*1000}`;
-//     setId(uniqueId);
-//   }, [prefix]);
-
-//   return id;
-// }
+import Link from "next/link";
 
 export default function Products() {
   const products = useSelector((state) => state.products);
@@ -24,7 +12,6 @@ export default function Products() {
   const searchedWarning = useSelector((state) => state.searchWarning);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-  // const uniqueId = useId('id');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -54,7 +41,9 @@ export default function Products() {
       {!isLoading &&
         searchedProducts.length > 0 &&
         searchedProducts.map((product) => (
-          <ProductItem key={`p${product.id}`} product={product} />
+          <Link href={`./Home/${products.id}`}>
+            <ProductItem key={`p${product.id}`} product={product} />
+          </Link>
         ))}
       {!isLoading && searchedWarning && (
         <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-main">
