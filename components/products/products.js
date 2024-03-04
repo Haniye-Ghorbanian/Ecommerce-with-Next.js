@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import ProductItem from "../product/productItem";
+import ProductItem from "./productItem";
 import { appActions } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import ProductsSkeleton from "../skeleton/productsSkeleton";
-import Link from "next/link";
+
 
 export default function Products() {
   const products = useSelector((state) => state.products);

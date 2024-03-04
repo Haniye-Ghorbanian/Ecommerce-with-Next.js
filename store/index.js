@@ -2,9 +2,10 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
+  singleProduct: {},
   filteredProducts: [],
   searchedProducts: [],
-  searchWarning: false 
+  searchWarning: false
 };
 
 const appSlice = createSlice({
@@ -13,6 +14,10 @@ const appSlice = createSlice({
   reducers: {
     setProducts(state, action) {
       state.products = action.payload;
+    },
+
+    setSingleProduct(state, action) {
+      state.singleProduct = action.payload
     },
 
     applyFilter(state, action) {
@@ -32,11 +37,11 @@ const appSlice = createSlice({
     },
 
     search(state, action) {
-        const searchResults = state.products.filter(product => product.title.toLowerCase().includes(action.payload.toLowerCase()))
-        state.searchedProducts= [];
-        state.searchedProducts.push(...searchResults)
-        state.searchWarning = searchResults.length === 0;
-        action.payload === "" ? state.searchWarning = true : "";
+      const searchResults = state.products.filter(product => product.title.toLowerCase().includes(action.payload.toLowerCase()))
+      state.searchedProducts = [];
+      state.searchedProducts.push(...searchResults)
+      state.searchWarning = searchResults.length === 0;
+      action.payload === "" ? state.searchWarning = true : "";
     }
   },
 });
