@@ -12,7 +12,7 @@ export default function Home() {
       <div className="relative">
         <Header />
         <Products />
-        <FooterMenu />
+        
       </div>
     </Provider>
   );

@@ -5,8 +5,8 @@ import Profile from "./profile";
 
 export default function Header() {
   return (
-    <div className="fixed top-0 w-full">
-      <Profile />
+    <div className="fixed top-16 w-full">
+      
       <WelcomeBanner />
       <Search />
       <Filters />

@@ -34,7 +34,7 @@ export default function ProductDataContainer({ path }) {
     <>
       {!isLoading && (
         <>
-          <div className="flex items-center justify-center w-full h-1/3 mb-3"><img src={image} className="w-4/5 object-cover" /></div>
+          <div className="flex items-center justify-center w-full h-1/3"><img src={image} className="w-4/5 object-contain aspect-square" /></div>
 
 
           <span className="w-full flex items-center justify-start text-md text-gray-400 font-light">{category}</span>
