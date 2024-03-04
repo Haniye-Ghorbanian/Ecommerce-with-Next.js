@@ -3,8 +3,10 @@ import Profile from "@/components/header/profile";
 
 export default function mainLayout({children}) {
     return(
-        <div className="relative">
+        <div>
+            
             <Profile />
+           
             {children}
             <FooterMenu />
         </div>
