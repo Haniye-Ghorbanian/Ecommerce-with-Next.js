@@ -8,7 +8,7 @@ export default function ProductPageButtons() {
 
         <button className="">
           <svg
-            class="w-6 h-6 text-gray-800 dark:text-white"
+            className="w-8 h-8 text-gray-800 dark:text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -16,9 +16,9 @@ export default function ProductPageButtons() {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
               d="m17 21-5-4-5 4V3.9c0-.2 0-.5.2-.6l.6-.3h8.4c.2 0 .4 0 .6.3l.2.6V21Z"
             />
           </svg>

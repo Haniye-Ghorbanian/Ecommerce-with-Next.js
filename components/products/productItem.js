@@ -1,25 +1,9 @@
-import { appActions } from "@/store";
-import { get } from "http";
 import Link from "next/link";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
 
 export default function ProductItem(props) {
   const { title, image, category, price, id } = props.product;
-  // const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     const response = await fetch(
-  //       `https://fakestoreapi.com/products/${id}`
-  //     );
-  //     const data = await response.json();
-  //     dispatch(appActions.setSingleProduct(data));
-  //     console.log(data);
-  //   };
-
-  //   getProduct();
-  // }, [dispatch]);
 
   return (
     <Link href={`./Home/${id}`}>

@@ -10,23 +10,24 @@ export default function ProductSizeInputs() {
 
     return (
 
-        <div className="flex flex-col items-start justify-start mt-6">
+        <div className="w-full h-1/6 flex flex-col items-start justify-start mb-5">
             <span className="mb-4">Sizes</span>
-            <div className=" w-full flex items-center justify-between space-x-10 h-8  p-5">
+            <div className=" w-full flex items-center justify-between space-x-10 h-8">
                 {sizesArr.map((size, index) => (
-                    <div className="relative w-1/5" key={index}>
-                        <div className="peer">
+                    <div className="relative group w-1/5" key={index}>
+                        <div className="">
                             <input
-                                className={`appearance-none w-10 aspect-square absolute top-0 shadow-sm rounded-md border-2 border-main bg-none checked:bg-main checked:text-white z-10`}
+                                className={`appearance-none w-10 aspect-square absolute top-0 shadow-sm rounded-md p-3 border-2 border-main bg-none checked:bg-main checked:text-white z-10`}
                                 type="checkbox"
                                 value={`option${index}`}
                                 onChange={handleCheckboxChange}
                                 checked={
                                     isChecked.value === `option${index}` ? isChecked.isChecked : ""
                                 }
+                                id={size}
                             />
                         </div>
-                        <label className="absolute left-2  top-2 font-semibold peer-has-[:checked]:text-white">
+                        <label className={`absolute left-2 top-2 font-semibold group-has-[:checked]:text-white ${isChecked ? "z-10" : ""}`} onClick={handleCheckboxChange} htmlFor={size}>
                             {size}
                         </label>
                     </div>

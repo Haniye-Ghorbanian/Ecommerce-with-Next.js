@@ -26,7 +26,7 @@ export default function ProductDataContainer({ path }) {
 
 
   const product = useSelector(state => state.singleProduct);
-  const {image, category, title, price} = product;
+  const { image, category, title, price } = product;
 
 
 
@@ -34,12 +34,13 @@ export default function ProductDataContainer({ path }) {
     <>
       {!isLoading && (
         <>
-          <img src={image} className="w-full h-1/2 object-cover mb-3" />
+          <div className="flex items-center justify-center w-full h-1/3 mb-3"><img src={image} className="w-4/5 object-cover" /></div>
 
-          <span className="text-md text-gray-400 font-light">{category}</span>
+
+          <span className="w-full flex items-center justify-start text-md text-gray-400 font-light">{category}</span>
           <div className="w-full flex items-center justify-between mt-3 mb-12">
-            <h1 className="font-bold text-3xl">{title}</h1>
-            <span className="font-medium text-2xl">{`$${price}`}</span>
+            <h1 className="font-extrabold text-lg">{title}</h1>
+            <span className=" text-lg">{`$${price}`}</span>
           </div>
         </>
       )}
