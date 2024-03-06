@@ -44,24 +44,18 @@ export default function Products() {
     fetchProducts();
   }, [dispatch]);
 
-  // console.log(products.length);
-  // console.log(displayingProducts);
-  console.log(toBeLoaded);
-
-  function handleDisplayingProducts(fetchedProducts) {
+  function handleDisplayingProducts() {
     const startIndex = 0;
     const endIndex = displayingLimit * count;
+    debugger;
+    const displayedProducts = productsData.current.slice(startIndex, endIndex);
+    const currentlyDisplayedNum = displayedProducts.length - 5;
+    console.log(displayedProducts.length, productsData.current.length);
 
-    // displayingProducts === 0 &&
-    //   setDisplayingProducts(fetchedProducts.slice(startIndex, endIndex));
-    // displayingProducts.length !== 0 &&
-      setTimeout(() => {
-        const displayedProducts = productsData.current.slice(startIndex, endIndex); 
-        setDisplayingProducts(displayedProducts);
-        setToBeLoaded(false);
-        console.log(displayedProducts)
-        console.log(displayingProducts)
-      }, 1000);
+    setTimeout(() => {
+      setDisplayingProducts(displayedProducts);
+      setToBeLoaded(false);
+    }, 1000);
   }
 
   useEffect(() => {
@@ -73,18 +67,16 @@ export default function Products() {
         ) {
           console.log("you reached to the end of the list");
           count++;
-          console.log(displayingProducts);
-          displayingProducts.length === productsData.current.length
-            ? setToBeLoaded(false)
-            : setToBeLoaded(true);
+
+          setToBeLoaded(true);
           handleDisplayingProducts();
         }
       }
     };
 
-    if (productsList.current) {
-      productsList.current.addEventListener("scroll", handleScroll);
-    }
+    productsList.current
+      ? productsList.current.addEventListener("scroll", handleScroll)
+      : "";
 
     return () => {
       if (productsList.current) {
@@ -127,7 +119,7 @@ export default function Products() {
           <ProductItem key={product.id} product={product} />
         ))}
 
-      {toBeLoaded ? (
+      {toBeLoaded && displayingProducts.length !== products.length ? (
         <div className="w-full flex justify-center items-center">
           <div className="custom-loader"></div>
         </div>
