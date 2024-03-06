@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="checkbox"]:checked + label {
-  color: white;
-  background-color: #400D54;
+.custom-loader {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#400d54 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#400d54);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation:s3 1s infinite linear;
+}
+
+@keyframes s3{ 
+  100%{transform: rotate(1turn)}
 }
