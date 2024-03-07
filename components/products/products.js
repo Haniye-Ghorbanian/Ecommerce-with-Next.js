@@ -13,6 +13,7 @@ export default function Products() {
   const products = useSelector((state) => state.products);
   const filteredProducts = useSelector((state) => state.filteredProducts);
   const searchedProducts = useSelector((state) => state.searchedProducts);
+  console.log(searchedProducts);
   const searchedWarning = useSelector((state) => state.searchWarning);
 
   const productsData = useRef(null);
@@ -47,10 +48,9 @@ export default function Products() {
   function handleDisplayingProducts() {
     const startIndex = 0;
     const endIndex = displayingLimit * count;
-    debugger;
+    // debugger;
     const displayedProducts = productsData.current.slice(startIndex, endIndex);
-    const currentlyDisplayedNum = displayedProducts.length - 5;
-    console.log(displayedProducts.length, productsData.current.length);
+    // console.log(displayedProducts.length, productsData.current.length);
 
     setTimeout(() => {
       setDisplayingProducts(displayedProducts);
@@ -65,7 +65,7 @@ export default function Products() {
           productsList.current.offsetHeight + productsList.current.scrollTop ===
           productsList.current.scrollHeight
         ) {
-          console.log("you reached to the end of the list");
+          // console.log("you reached to the end of the list");
           count++;
 
           setToBeLoaded(true);
@@ -85,6 +85,54 @@ export default function Products() {
     };
   }, []);
 
+  const displayData = () => {
+    if (!isLoading) {
+      if (
+        filteredProducts.length === 0 &&
+        searchedProducts.length === 0 &&
+        !searchedWarning
+      ) {
+        return displayingProducts.map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ));
+      }
+
+      if (filteredProducts.length > 0) {
+        if (searchedProducts.length === 0) {
+          if (!searchedWarning) {
+            return filteredProducts.map((product) => (
+              <ProductItem key={product.id} product={product} />
+            ));
+          }
+
+          if (searchedWarning) {
+            return (
+              <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-main">
+                <p>No products found!</p>
+              </div>
+            );
+          }
+        } else if (searchedProducts.length > 0) {
+          return searchedProducts.map((product) => (
+            <ProductItem key={`p${product.id}`} product={product} />
+          ));
+        }
+      }
+
+      if (searchedProducts.length > 0) {
+        if (filteredProducts.length === 0) {
+          return searchedProducts.map((product) => (
+            <ProductItem key={product.id} product={product} />
+          ));
+        } else if (filteredProducts.length > 0) {
+          return filteredProducts.map((product) => (
+            <ProductItem key={`p${product.id}`} product={product} />
+          ));
+        }
+      }
+    }
+  };
+
   return (
     <div
       className="w-full h-96 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-scroll px-6 pb-4 fixed top-96"
@@ -93,31 +141,7 @@ export default function Products() {
       {isLoading &&
         [...Array(8)].map((item, index) => <ProductsSkeleton key={index} />)}
 
-      {!isLoading &&
-        filteredProducts.length > 0 &&
-        filteredProducts.map((product) => (
-          <ProductItem key={product.id} product={product} />
-        ))}
-
-      {!isLoading &&
-        searchedProducts.length > 0 &&
-        searchedProducts.map((product) => (
-          <ProductItem key={`p${product.id}`} product={product} />
-        ))}
-
-      {!isLoading && searchedWarning && (
-        <div className="w-full h-full flex items-center justify-center font-bold text-2xl text-main">
-          <p>No products found!</p>
-        </div>
-      )}
-
-      {!isLoading &&
-        searchedProducts.length === 0 &&
-        filteredProducts.length === 0 &&
-        !searchedWarning &&
-        displayingProducts.map((product) => (
-          <ProductItem key={product.id} product={product} />
-        ))}
+      {displayData()}
 
       {toBeLoaded && displayingProducts.length !== products.length ? (
         <div className="w-full flex justify-center items-center">

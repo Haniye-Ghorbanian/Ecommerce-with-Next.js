@@ -5,7 +5,7 @@ const initialState = {
   singleProduct: {},
   filteredProducts: [],
   searchedProducts: [],
-  searchWarning: false
+  searchWarning: false,
 };
 
 const appSlice = createSlice({
@@ -17,7 +17,7 @@ const appSlice = createSlice({
     },
 
     setSingleProduct(state, action) {
-      state.singleProduct = action.payload
+      state.singleProduct = action.payload;
     },
 
     applyFilter(state, action) {
@@ -37,12 +37,21 @@ const appSlice = createSlice({
     },
 
     search(state, action) {
-      const searchResults = state.products.filter(product => product.title.toLowerCase().includes(action.payload.toLowerCase()))
+      let searchResults = [];
+      if (state.filteredProducts.length > 0) {
+        searchResults = state.filteredProducts.filter((product) =>
+          product.title.toLowerCase().includes(action.payload.toLowerCase())
+        );
+      } else {
+        searchResults = state.products.filter((product) =>
+          product.title.toLowerCase().includes(action.payload.toLowerCase())
+        );
+      }
       state.searchedProducts = [];
-      state.searchedProducts.push(...searchResults)
+      state.searchedProducts.push(...searchResults);
       state.searchWarning = searchResults.length === 0;
-      action.payload === "" ? state.searchWarning = true : "";
-    }
+      action.payload === "" ? (state.searchWarning = true) : "";
+    },
   },
 });
 
@@ -53,5 +62,3 @@ const store = configureStore({
 export const appActions = appSlice.actions;
 
 export default store;
-
-

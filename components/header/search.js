@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 export default function Search() {
   const dispatch = useDispatch();
   const searchHandler = (e) => {
-    const enteredInput = e.target.value;
-    setInput(enteredInput);
+    // const enteredInput = e.target.value;
+    // setInput(enteredInput);
+    debugger
 
     dispatch(appActions.search(e.target.value));
   };
